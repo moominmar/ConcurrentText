@@ -21,13 +21,18 @@
     #printText{
       color:rgb(0, 0, 0);
       padding: 10px;
+      font-family: 'Courier New', Courier, monospace;
+      width: auto;
+      height: auto;
+      /* border: 1px solid rgb(153, 153, 153); */
+      /* overflow: scroll; */
     }
     #inputBox{
       width:50%;
       padding:10px;
       overflow: scroll;
     }
-    #clear {
+    .spanbox {
       padding: 7px 10px;
       border: 1px solid grey;
       border-radius: 2px;
@@ -46,27 +51,36 @@
     </div>
     <br/>
     <input type="text" id="inputBox" placeholder="placeholder text"> 
-    <span id="clear">&#x2715;</span>
+    <span class="spanbox" id="clear">&#x2715;</span>
     <div id="printText"></div>
     <div id="debugspot"></div>
   </body>
   <script>
     var debug = document.getElementById("debugspot");
+    var printSpot = document.getElementById("printText");
     var inputBox = document.getElementById("inputBox");
     inputBox.onkeyup = function() {
-      document.getElementById("printText").innerHTML = inputBox.value;
+      printSpot.innerHTML = inputBox.value;
     }
     var but = document.querySelectorAll("button");
     but.forEach(element => {
       element.onclick = function() {
-        inputBox.value += element.innerHTML+"()";
-        document.getElementById("printText").innerHTML = inputBox.value;
+        var curPos = inputBox.selectionStart;
+        let str = inputBox.value;
+        let newStr = str.slice(0, curPos) + element.innerHTML + "(  )" + str.slice(curPos);
+        // edit old string to include content in the middle
+        inputBox.value = newStr; 
+        printSpot.innerHTML = newStr;
+        let newPos = curPos+element.innerHTML.length + 2;
+        // set new cursor position
+        inputBox.setSelectionRange(newPos,newPos);
+        inputBox.focus();
       }
     });
     var clear = document.getElementById("clear");
     clear.onclick = function() {
       inputBox.value = "";
-      document.getElementById("printText").innerHTML = "";
+      printSpot.innerHTML = "";
     }
   </script>
 </html>
