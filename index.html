@@ -1,0 +1,30 @@
+<html>
+  <style>
+    html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #printText{
+      color:rgb(0, 0, 0);
+      padding: 10px;
+    }
+    #inputBox{
+      width:50%;
+      padding:10px;
+    }
+  </style>
+  <body>
+    <h3>Type & Print Text On The Go</h3>
+    <p>Type in text in the box. It will print underneath.</p>
+    <input type="text" id="inputBox" placeholder="placeholder text">
+    <div id="printText"></div>
+  </body>
+  <script>
+    var inputBox = document.getElementById("inputBox");
+    inputBox.onkeyup = function() {
+      document.getElementById("printText").innerHTML = inputBox.value;
+    }
+  </script>
+</html>
