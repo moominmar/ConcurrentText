@@ -1,3 +1,3 @@
 # ConcurrentText
 
-Learning how to have a responsive input text box with parsing.
+A responsive input text box. Press buttons to add function names and input the next thing into the parenthesis.
